@@ -150,6 +150,27 @@
       text-align: center;
       padding: 20px 0;
     }
+
+    .notification {
+     position: fixed;
+     top: 20px;
+     left: 20px;
+     background: #f39c12;
+     color: white;
+     padding: 15px 20px;
+     border-radius: 10px;
+     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+     font-size: 1em;
+     z-index: 1000;
+     animation: fadeInOut 6s ease-in-out forwards;
+    }
+
+    @keyframes fadeInOut {
+     0% { opacity: 0; transform: translateY(20px); }
+     10% { opacity: 1; transform: translateY(0); }
+     90% { opacity: 1; }
+     100% { opacity: 0; transform: translateY(20px); }
+    }
   </style>
 </head>
 
@@ -215,5 +236,41 @@
   <footer>
     <p>&copy; 2025 Sales Advisor Loan Calculator. Hak cipta terpelihara.</p>
   </footer>
+
+  <div id="notification-container"></div>
+
+  <script>
+    const notifications = [
+    "A***r telah mendapatkan SA Loan Calculator 3 jam lalu",
+    "R****n telah mendapatkan SA Loan Calculator 7 jam lalu",
+    "B*****i telah mendapatkan SA Loan Calculator 9 jam lalu",
+    "F****l telah mendapatkan SA Loan Calculator 8 jam lalu",
+    "D*****a telah mendapatkan SA Loan Calculator 15 minit lalu",
+    "M***y telah mendapatkan SA Loan Calculator 4 jam lalu",
+    "Z***y telah mendapatkan SA Loan Calculator 2 jam lalu",
+    "G****r telah mendapatkan SA Loan Calculator 20 minit lalu",
+    "P***g telah mendapatkan SA Loan Calculator 45 minit lalu",
+    "S*****d telah mendapatkan SA Loan Calculator 6 jam lalu",
+   ];
+
+  function showNotification(message) {
+    const container = document.getElementById("notification-container");
+    const notif = document.createElement("div");
+    notif.className = "notification";
+    notif.textContent = message;
+    container.appendChild(notif);
+
+    setTimeout(() => {
+      notif.remove();
+    }, 6000); // hilang selepas 6 saat
+  }
+
+  // papar satu notifikasi setiap 15 saat
+  let index = 0;
+  setInterval(() => {
+    showNotification(notifications[index]);
+    index = (index + 1) % notifications.length;
+  }, 15000); // setiap 15 saat
+</script>
 </body>
 </html>
